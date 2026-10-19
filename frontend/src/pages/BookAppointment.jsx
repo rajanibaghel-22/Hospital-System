@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
 
 function BookAppointment({ doctor, onBack, onBooked }) {
   const navigate = useNavigate();
@@ -30,7 +29,7 @@ function BookAppointment({ doctor, onBack, onBooked }) {
   useEffect(() => {
     const loadDoctors = async () => {
       try {
-        const response = await axios.get(`${API_URL}/doctors`);
+        const response = await axios.get("/doctors");
         const data = response.data;
 
         const list = Array.isArray(data)
@@ -121,22 +120,18 @@ function BookAppointment({ doctor, onBack, onBooked }) {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `${API_URL}/appointments`,
-        {
-          doctorId,
-          date,
-          timeSlot,
-          mode,
-          reason,
-          questionnaire,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post("/appointments", {
+  doctorId,
+  date,
+  timeSlot,
+  mode,
+  reason,
+  questionnaire,
+}, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
       const appointment = response.data.appointment;
 

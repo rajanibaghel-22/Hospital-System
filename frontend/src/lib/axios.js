@@ -3,7 +3,7 @@ import axios from "axios";
 // Paste your live backend URL here once you deploy backend. 
 // KEEP "/api" at the end!
 const api = axios.create({
-  baseURL: "https://YOUR-BACKEND-NAME.onrender.com/api", 
+  baseURL: "https://hospital-system-opxr.onrender.com", 
 });
 
 export default api;
